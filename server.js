@@ -1,6 +1,3 @@
-// =======================================
-//              DEPENDENCIES
-// =======================================
 require("dotenv").config();
 const express = require("express");
 const methodOverride = require("method-override");
@@ -9,10 +6,11 @@ const session = require("express-session");
 const productsController = require("./controllers/ProductsController");
 const productsRatingsController = require("./controllers/ProductRatingsController");
 const usersController = require("./controllers/UsersController");
-const app = express();
-const port = 5000;
 
-const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
+const { DB_URI } = process.env;
+const PORT = 3000;
+const app = express();
+
 mongoose.set("useFindAndModify", false);
 
 app.set("view engine", "ejs");
@@ -111,13 +109,13 @@ app.post("/users/logout", authenticatedOnlyMiddleware, usersController.logout);
 
 // connect to DB, then inititate Express app
 mongoose
-    .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((response) => {
         // DB connected successfully
         console.log("DB connection successful");
 
-        app.listen(port, () => {
-            console.log(`Biscoff Bakery app listening on port: ${port}`);
+        app.listen(PORT, () => {
+            console.log(`app is live @ http://localhost:${PORT}`);
         });
     })
     .catch((err) => {
