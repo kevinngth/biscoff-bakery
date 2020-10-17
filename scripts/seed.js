@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const productData = require("../models/bakedgoods");
 const ProductModel = require("../models/products");
 
-const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
+const { DB_URI } = process.env;
 
 mongoose
-    .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((response) => {
         console.log("MongoDB connection successful");
     })

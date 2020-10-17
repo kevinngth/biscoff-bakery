@@ -36,6 +36,9 @@ app.use(setUserVarMiddleware);
  * PRODUCTS ROUTES
  */
 
+// root route
+app.get("/", (req, res) => res.redirect("/products"));
+
 // index route
 app.get("/products", productsController.listProducts);
 
