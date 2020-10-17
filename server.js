@@ -148,12 +148,10 @@ function authenticatedOnlyMiddleware(req, res, next) {
 function setUserVarMiddleware(req, res, next) {
     // default user template var set to null
     res.locals.user = null;
-
     // check if req.session.user is set,
     // if set, template user var will be set as well
     if (req.session && req.session.user) {
         res.locals.user = req.session.user;
     }
-
     next();
 }

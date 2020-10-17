@@ -1,26 +1,26 @@
 <%- include('../partials/header'); %>
 
-    <h1><%= pageTitle %></h1>
+	<main class="container">
 
-    <ul>
-        <% bakegoods.forEach( (item, idx) => { %>
-            <li class="mb-5">
-                <p>
-                    <a href="/products/<%= item.slug %>"><%= 'Name: ' + item.name %></a>
-                </p>
-                <p>
-                    <%= 'Price: ' + item.price %>
-                </p>
+		<h1><%= pageTitle %></h1>
 
-                <div class="action-buttons">
-                    <a class="btn btn-primary" href="/products/<%= item.slug %>/edit">Edit</a>
-                    |
-                    <form method="POST" action="/products/<%= item.slug %>?_method=DELETE">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </li>
-        <% }) %>
-    </ul>
+		<div class="card-columns">
+			<% bakegoods.forEach( (item, idx) => { %>
+				<div class="card">
+					<img src="<%= item.image %>" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title"><a href="/products/<%= item.slug %>"><%= item.name %></a></h5>
+						<div class="card-text action-buttons row">
+							<div class="col-6 d-flex align-items-center"><%= 'Price: ' + item.price %></div>
+							<div class="col-3"><a class="btn btn-block btn-primary" href="/products/<%= item.slug %>/edit">Edit</a></div>
+							<div class="col-3"><form method="POST" action="/products/<%= item.slug %>?_method=DELETE">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form></div>
+						</div>
+					</div>
+				</div>
+			<% }) %>
+		</div>
+	</main>
 
 <%- include('../partials/footer'); %>
